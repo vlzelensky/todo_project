@@ -1,0 +1,147 @@
+body {
+    background: url(img/background.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+    
+}
+
+.container {
+    width: 300px;
+    margin: 50px auto;
+}
+
+h1 {
+    text-align: center;
+    margin: 0;
+    font-family: 'Sansita Swashed', cursive;
+    color: #fff;
+    font-weight: 600;
+    font-size: 25px;
+    user-select: none;
+}
+
+.toDo {
+    background-color: #50c878;
+    border-style: solid;
+    border-radius: 10px;
+    border-width: 0;
+    padding-top: 5px;
+    padding-bottom: 10px;
+    box-shadow: 0 2px 10px 0 #111015;
+    user-select: none;
+
+}
+
+.content {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 15px;
+}
+
+.add {
+    color: green;
+    border-radius: 0 5px 5px 0;
+    border-style: solid solid solid solid;
+    border-color: rgb(140, 122, 241);
+    cursor: pointer;
+    z-index: 1;
+    display: inline-block;
+}
+
+.message {
+    border-radius: 5px 0 0 5px;
+    border-style: solid none solid solid;
+    border-color: rgb(140, 122, 241);
+    display: inline-block;
+    position: relative;
+    height: 25px;
+}
+
+input {
+    padding-left: 5px;
+}
+
+.message :active, :hover, :focus {
+    outline: 0;
+    outline-offset: 0;
+}
+
+.wrapper {
+    color: #fff;
+}
+
+.new-wrapper {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+textarea {
+    background-color: #fff;
+    resize: none;
+    border-style: solid none solid solid;
+    border-color: rgb(140, 122, 241);
+    border-width: 2px;
+    height: 21px;
+    cursor: unset;
+}
+
+.delete_todo {
+    border-style: solid solid solid solid;
+    border-color: rgb(140, 122, 241);
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    color: red;
+    height: 29px;
+}
+
+.edit_todo {
+    border-style: solid none solid solid;
+    border-color: rgb(140, 122, 241);
+    cursor: pointer;
+    color: rgb(88, 88, 231);
+    height: 29px;
+    width: 26px;
+}
+
+.checkbox-block {
+    display: flex;
+    background-color: -internal-light-dark(rgb(239, 239, 239), rgb(59, 59, 59));
+    border-style: solid none solid solid;
+    border-radius: 5px 0 0 5px;
+    border-width: 2px;
+    border-color: rgb(140, 122, 241);
+    background-color: #fff;
+}
+
+.checkbox-status {
+    display: block;
+    margin: 6px;
+}
+
+input:checked + .strike {
+    display: flex;
+    transform-origin: right ;
+    transition: 0.5s;
+}
+
+textarea #beLowerCase {
+    text-align:right;
+}
+
+.strike {
+    width: 170px;
+    border-style: solid none none none;
+    border-color: rgb(116, 116, 116);
+    border-width: 2px;
+    z-index: 1;
+    position: absolute;
+    margin-top: 9px;
+    margin-left: 28px ;
+    display: none;
+
+}
