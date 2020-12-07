@@ -125,8 +125,6 @@ textarea {
 
 input:checked + .strike {
     display: flex;
-    transform-origin: right ;
-    transition: 0.5s;
 }
 
 textarea #beLowerCase {
