@@ -1,15 +1,15 @@
 const express = require("express");
 const app = express();
+const path = require("path");
 const mongoose = require("mongoose");
+const todoList = [];
 require("dotenv/config");
 
 const postRoute = require("./routes/posts");
 
-app.use("/", postRoute);
+app.use(express.static(path.resolve(__dirname, 'front')));
 
-app.post('/addtodo', function(req, res) {
-   res.send("your todo list will be here soon");
-});
+app.use("/", postRoute);
 
 app.put('/edittodo', function(){});
 

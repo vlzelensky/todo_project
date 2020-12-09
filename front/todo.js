@@ -115,4 +115,28 @@ inputMessage.addEventListener('keydown', (event) => {
     }
 })
 
-// module.exports = monguse.model("posts", todoList);
+async function request(url, method = "GET", data = null) {
+    try {
+        const headers = {}
+        let body
+        if (data) {
+            headers['Content-Type'] = "aplication/json"
+            body = JSON.stringify(data);
+        }
+        
+        const response = await fetch(url, {
+            method,
+            headers,
+            body
+        });
+        returnresponse.json();
+    } catch (e) {
+        console.warn("Error", e.message)
+    }
+}
+
+async function ready() {
+    todoList.push(request("http://localhost:8080/api/tasks/"));
+}
+
+const readY = ready();
