@@ -1,7 +1,6 @@
 let todoList = [];
 let inputMessage = document.querySelector('.message');
 let status = true;
-
 const renderTodoItem = (todoItem) => (
     `
         <div class="new-wrapper" id="${todoItem.id}">
@@ -115,3 +114,5 @@ inputMessage.addEventListener('keydown', (event) => {
         event.preventDefault();
     }
 })
+
+// module.exports = monguse.model("posts", todoList);
