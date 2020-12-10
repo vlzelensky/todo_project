@@ -47,28 +47,16 @@ async function deleteTodo() {
     const id = this.parentElement.getAttribute("id");
     await request("/api/task/" + id, "delete");
     status = true;
-    ready();
+    await ready();
 }
 
-function todoDone() {
+async function todoDone() {
     const id = this.parentElement.parentElement.getAttribute("id");
     const todoChange = todoList.find((element) => element.id === id);
-    todoChange.checked = !todoChange.checked;
-    if (todoChange.checked === true) {
-        setTimeout(() => {
-            let index = todoList.indexOf(todoChange, 0);
-            todoList.splice(index, 1);
-            todoList.push(todoChange);
-        render();
-        }, 500);
-    } else if (todoChange.checked === false) {
-        setTimeout(() => {
-            let index = todoList.indexOf(todoChange, 0);
-            todoList.splice(index, 1);
-            todoList.unshift(todoChange);
-        render();
-        }, 500);
-    }
+    await request("/api/task/" + id, "put", {...todoChange,
+        checked: !todoChange.checked
+    });
+    await ready();
 
 }
 
@@ -83,7 +71,7 @@ function todoEdit() {
     }
 }
 
-function setChangesOnEnter(event) {
+async function setChangesOnEnter(event) {
     if (event.key === "Enter") {
         const id = this.parentElement.getAttribute("id");
         const todoChange = todoList.find((element) => element.id === id);
@@ -92,11 +80,13 @@ function setChangesOnEnter(event) {
             event.preventDefault();
             return
         }
-        todoChange.text = newValue;
+        await request("/api/task/" + id, "put", {...todoChange,
+        text: newValue,
+        })
         this.parentElement.querySelector("textarea").setAttribute("disabled", "disabled");
         event.preventDefault();
         status = true;
-        render();
+        await ready();
     }
 }
 

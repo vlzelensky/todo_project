@@ -121,6 +121,7 @@ textarea {
 .checkbox-status {
     display: block;
     margin: 6px;
+    cursor: pointer;
 }
 
 input:checked + .strike {
@@ -143,3 +144,5 @@ textarea #beLowerCase {
     display: none;
 
 }
+
+

@@ -13,7 +13,7 @@ app.use("/", postRoute);
 
 mongoose.connect(
    process.env.DB_CONNECTION, { useNewUrlParser: true }, () => {
-   console.log("connected to database")
+   console.log("connected to port 8080")
 });
 
 app.listen(8080);
