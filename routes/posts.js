@@ -1,21 +1,24 @@
-const { path } = require("dotenv/lib/env-options");
+const path = require("path");
 const express = require("express");
 const router = express.Router();
-const todoList = [{
-    text : 3122,
-    checked : false,
-    id : String(Date.now()), 
-}];
+let todoList = [];
 
 router.get('/api/tasks', function(req, res) {
-    res.status(200).json(todoList);
+    res.status(200).json(todoList.slice().reverse());
 });
 
 router.get('*', function(req, res) {
-    res.sendFile(path.resolve(__dirname, 'front', " index.html"));
+    res.sendFile(path.resolve(__dirname, 'front', "index.html"));
  });
 
- router.post('/addtodo', (req, res) => {
-    console.log(req.body);
+router.post('/api/task', (req, res) => {
+    const newTask = req.body;
+    todoList.push({...newTask, id: String(Date.now())});
+    res.status(200).json({});
 });
- module.exports = router;
+
+router.delete('/api/task/:id', (req,res) => {
+  todoList = todoList.filter(el => req.params.id !== el.id);
+  res.status(200).json({});
+})
+module.exports = router;

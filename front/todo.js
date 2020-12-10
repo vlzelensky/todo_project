@@ -21,35 +21,33 @@ function render() {
         str += renderTodoItem(todoItem);
     });
     document.querySelector(".wrapper").innerHTML = str;
-    document.querySelectorAll('.delete_todo').forEach((element) => element.addEventListener('click', deleteTodo));   
+    document.querySelectorAll('.delete_todo').forEach((element) => element.addEventListener('click', deleteTodo));
     document.querySelectorAll('.checkbox-status').forEach((element) => element.addEventListener("click", todoDone));
     document.querySelectorAll('.edit_todo').forEach((element) => element.addEventListener('click', todoEdit));
     document.querySelectorAll('textarea').forEach((element) => element.addEventListener('keydown', setChangesOnEnter));
     document.querySelectorAll('textarea').forEach((element) => element.addEventListener('blur', setPrevValue));
 }
 
-function addTodo() {
+async function addTodo() {
     newTask = inputMessage.value.trim();
     if (!newTask) {
         inputMessage.focus();
         return
     }
-    todoList.unshift({
+    await request('/api/task', 'POST', {
         text : newTask,
         checked : false,
-        id : String(Date.now()), 
     });
-    render();
+    await ready();
     inputMessage.value = '';
     inputMessage.focus();
-    console.log(todoList);
 }
 
-function deleteTodo() {
+async function deleteTodo() {
     const id = this.parentElement.getAttribute("id");
-    todoList = todoList.filter((element) => element.id !== id);
-    status = true;  
-    render();
+    await request("/api/task/" + id, "delete");
+    status = true;
+    ready();
 }
 
 function todoDone() {
@@ -71,7 +69,7 @@ function todoDone() {
         render();
         }, 500);
     }
-     
+
 }
 
 function todoEdit() {
@@ -120,23 +118,23 @@ async function request(url, method = "GET", data = null) {
         const headers = {}
         let body
         if (data) {
-            headers['Content-Type'] = "aplication/json"
+            headers['Content-Type'] = "application/json"
             body = JSON.stringify(data);
         }
-        
+
         const response = await fetch(url, {
             method,
             headers,
             body
         });
-        returnresponse.json();
+        return response.json();
     } catch (e) {
         console.warn("Error", e.message)
     }
 }
 
 async function ready() {
-    todoList.push(request("http://localhost:8080/api/tasks/"));
+    todoList = await request("/api/tasks/");
+    render();
 }
-
-const readY = ready();
+ready();

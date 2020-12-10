@@ -3,7 +3,7 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
     height: 100vh;
-    
+
 }
 
 .container {
@@ -41,10 +41,10 @@ h1 {
 }
 
 .add {
-    color: green;
     border-radius: 0 5px 5px 0;
     border-style: solid solid solid solid;
     border-color: rgb(140, 122, 241);
+    color: grey;
     cursor: pointer;
     z-index: 1;
     display: inline-block;
@@ -102,8 +102,8 @@ textarea {
 .edit_todo {
     border-style: solid none solid solid;
     border-color: rgb(140, 122, 241);
+    color: grey;
     cursor: pointer;
-    color: rgb(88, 88, 231);
     height: 29px;
     width: 26px;
 }
