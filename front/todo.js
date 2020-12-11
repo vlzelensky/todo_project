@@ -3,7 +3,7 @@ let inputMessage = document.querySelector('.message');
 let status = true;
 const renderTodoItem = (todoItem) => (
     `
-        <div class="new-wrapper" id="${todoItem.id}">
+        <div class="new-wrapper" id="${todoItem._id}">
             <div class="checkbox-block">
                 <input type="checkbox" class="checkbox-status" ${todoItem.checked ? "checked" : ""}/>
                 <div class="strike"></div>
@@ -45,14 +45,14 @@ async function addTodo() {
 
 async function deleteTodo() {
     const id = this.parentElement.getAttribute("id");
-    await request("/api/task/" + id, "delete");
+    await request("/api/task/" + id, "delete",);
     status = true;
     await ready();
 }
 
 async function todoDone() {
     const id = this.parentElement.parentElement.getAttribute("id");
-    const todoChange = todoList.find((element) => element.id === id);
+    const todoChange = todoList.find((element) => element._id === id);
     await request("/api/task/" + id, "put", {...todoChange,
         checked: !todoChange.checked
     });
@@ -74,7 +74,7 @@ function todoEdit() {
 async function setChangesOnEnter(event) {
     if (event.key === "Enter") {
         const id = this.parentElement.getAttribute("id");
-        const todoChange = todoList.find((element) => element.id === id);
+        const todoChange = todoList.find((element) => element._id === id);
         let newValue = this.parentElement.querySelector("textarea").value.trim();
         if (!newValue) {
             event.preventDefault();
